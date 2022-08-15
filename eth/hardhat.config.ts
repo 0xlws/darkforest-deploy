@@ -24,7 +24,7 @@ import './tasks/whitelist';
 
 require('dotenv').config();
 
-const { DEPLOYER_MNEMONIC, ADMIN_PUBLIC_ADDRESS,HARMONY_PRIVATE_KEY } = process.env;
+const { DEPLOYER_MNEMONIC, ADMIN_PUBLIC_ADDRESS, HARMONY_PRIVATE_KEY } = process.env;
 
 // Ensure we can lookup the needed workspace packages
 const packageDirs = {
@@ -52,7 +52,6 @@ extendEnvironment((env: HardhatRuntimeEnvironment) => {
     return settings.parse(settings.AdminPlanets, planets);
   });
 });
-
 
 // The xdai config, but it isn't added to networks unless we have a DEPLOYER_MNEMONIC
 const xdai = {
@@ -92,18 +91,18 @@ const config: HardhatUserConfig = {
     },
     harmonytestnet: {
       url: `https://api.s0.b.hmny.io`,
-      accounts: [`0x${HARMONY_PRIVATE_KEY}`],
-      chainId: 1666700000
+      accounts: HARMONY_PRIVATE_KEY ? [`0x${HARMONY_PRIVATE_KEY}`] : [],
+      chainId: 1666700000,
     },
     harmonymainnet: {
       url: `https://api.harmony.one`,
-      accounts: [`0x${HARMONY_PRIVATE_KEY}`],
-      chainId: 1666600000
+      accounts: HARMONY_PRIVATE_KEY ? [`0x${HARMONY_PRIVATE_KEY}`] : [],
+      chainId: 1666600000,
     },
     harmonydevnet: {
       url: `https://api.s0.ps.hmny.io/`,
-      accounts: [`0x${HARMONY_PRIVATE_KEY}`],
-      chainId: 1666900000
+      accounts: HARMONY_PRIVATE_KEY ? [`0x${HARMONY_PRIVATE_KEY}`] : [],
+      chainId: 1666900000,
     },
 
     // Used when you dont specify a network on command line, like in tests
